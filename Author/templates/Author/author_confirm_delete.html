@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block extraheading %}
+    <link rel="stylesheet" href=" {% static 'css/author.css' %}">
+
+{% endblock extraheading %}
+
+{% block content %}    
+    <form method="post" style="text-align: center;">{% csrf_token %}
+        <h2>Are you sure you want to delete "{{ object }}"?</h2>
+        <input class="btn btn-danger" type="submit" value="Confirm">
+        <a href="{% url 'author:author_list' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+{% endblock content %}
+    

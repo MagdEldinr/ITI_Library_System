@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load get_by_index %}
+
+{% block extraheading %}
+    <link rel="stylesheet" href=" {% static 'css/book.css' %}">
+
+{% endblock extraheading %}
+    
+
+{% block content %}
+    <div class="d-flex justify-content-around">
+        <div class="row">
+            <h1 style="font-weight: bold;" class="yeseva mr-2 ">Books List</h1>
+            
+            {% if perms.Book.change_book %}
+                <a href="{% url 'book:book_add' %}"><i class="fa fa-3x fa-plus-circle" aria-hidden="true"></i></a>
+            {% endif %}
+                
+        </div>
+    </div>
+
+    
+    <div class="row d-flex justify-content-start">
+        {% for b in book_list %}
+            <div class="col-md-3 col-12 p-2">
+                <div class="card" style="min-height: 101%;">
+                    <div class="card-body">
+                        <h4 class="card-title" style="color: skyblue;">{{ b.title }}</h4>
+                        <a href="{% url 'author:author_details' pk=b.author.pk %}" class="text-muted">@{{ b.author }}</a>
+                        <p class="card-text">Topic: {{ b.topic }}</p>
+                        <p class="card-text">Pages: {{ b.number_of_pages }}</p>
+                        <p class="card-text">Status: {{ b.status }}</p>
+                        <div class="d-flex justify-content-around">
+                            {% if perms.Book.change_book %}
+                                <a href="{% url 'book:book_edit' pk=b.pk %}" class="card-link btn btn-warning">Edit</a>
+                            {% endif %}
+                            
+                            {% if perms.Book.delete_book %}
+                                <a href="{% url 'book:book_delete' pk=b.pk %}" class="card-link btn btn-danger">Delete</a>
+                            {% endif %}
+                            <a href="https://www.google.com" class="card-link btn btn-primary">Download</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock content %}

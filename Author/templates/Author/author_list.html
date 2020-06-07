@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load get_by_index %}
+
+{% block extraheading %}
+    <link rel="stylesheet" href=" {% static 'css/author.css' %}">
+
+{% endblock extraheading %}
+    
+
+{% block content %}
+    <div class="d-flex justify-content-around">
+        <div class="row">
+            <h1 style="font-weight: bold;" class="yeseva mr-2 ">Authors List</h1>
+            
+            {% if perms.Author.add_author %}
+                <a href="{% url 'author:author_add' %}"><i class="fa fa-3x fa-plus-circle" aria-hidden="true"></i></a>
+            {% endif %}
+                
+        </div>
+    </div>
+
+    
+    <div class="row d-flex justify-content-between">
+        {% for a in author_list %}
+            <div class="col-md-3 col-12 p-2">
+                <div class="card">
+                    <div class="card-body">
+                        <a href="{% url 'author:author_details' pk=a.pk %}" class="authorLink"><h4 class="card-title">{{ a.name }}</h4></a>
+                        <p class="card-subtitle mb-2 text-muted">@{{ tags|get_by_index:forloop.counter0 }}</p>
+                        <p class="card-text">Number of books: {{ a.author_books.count }}</p>
+                        <p class="card-text">Email: {{ a.email }}</p>
+                        <p class="card-text">From: {{ a.nationallity }}</p>
+                        <div class="d-flex justify-content-around">
+                            {% if perms.Author.change_author %}
+                                <a href="{% url 'author:author_edit' pk=a.pk %}" class="card-link btn btn-warning">Edit</a>
+                            {% endif %}
+                            
+                            {% if perms.Author.delete_author %}
+                                <a href="{% url 'author:author_delete' pk=a.pk %}" class="card-link btn btn-danger">Delete</a>
+                            {% endif %}
+                        </div>
+                               
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock content %}

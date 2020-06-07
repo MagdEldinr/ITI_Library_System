@@ -1,0 +1,20 @@
+
+
+@import url('https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap');
+
+.yeseva{
+    font-family: 'Yeseva One', cursive;
+}
+.authorLink{
+    color: hotpink;
+}
+.authorLink:hover{
+    color: brown;
+}
+.add-form label{
+    width: 20%;
+}
+.add-form input, select{
+    width: 65%;
+}
+

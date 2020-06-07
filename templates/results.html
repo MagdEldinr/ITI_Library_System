@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load get_by_index %}
+
+{% block content %}
+
+    {% if book_results %}
+        <h4 style="text-decoration: underline;">Books</h4>
+        {% for b in book_results %}
+            <div class="col-md-3 col-12 p-2">
+                <div class="card" style="min-height: 101%;">
+                    <div class="card-body">
+                        {% comment %}
+                        <a href="{% url 'book:author_details' pk=a.pk %}" class="authorLink"><h4 class="card-title">{{ a.name }}</h4></a>
+                        {% endcomment %}
+                        <h4 class="card-title">{{ b.title }}</h4>
+                        <a href="{% url 'author:author_details' pk=b.author.pk %}" class="text-muted">@{{ b.author }}</a>
+                        <p class="card-text">Topic: {{ b.topic }}</p>
+                        <p class="card-text">Pages: {{ b.number_of_pages }}</p>
+                        <p class="card-text">Status: {{ b.status }}</p>
+                        <a href="{% url 'book:book_edit' pk=b.pk %}" class="card-link btn btn-warning">Edit</a>
+                        <a href="{% url 'book:book_delete' pk=b.pk %}" class="card-link btn btn-danger">Delete</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    {% if author_results %}
+        <h4 style="text-decoration: underline;">Authors</h4>
+        {% for a in author_results %}
+            <div class="col-md-3 col-12 p-2">
+                <div class="card">
+                    <div class="card-body">
+                        <a href="{% url 'author:author_details' pk=a.pk %}" class="authorLink"><h4 class="card-title">{{ a.name }}</h4></a>
+                        <p class="card-text">Number of books: {{ a.author_books.count }}</p>
+                        <p class="card-text">Email: {{ a.email }}</p>
+                        <p class="card-text">From: {{ a.nationallity }}</p>
+                        <a href="{% url 'author:author_edit' pk=a.pk %}" class="card-link btn btn-warning">Edit</a>
+                        <a href="{% url 'author:author_delete' pk=a.pk %}" class="card-link btn btn-danger">Delete</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    
+    {% if not author_results %}
+        
+        {% if not book_results %}  
+            <h3>No Matchs Found</h3>  
+            <form method="get" >
+                Search Notecards:<input type="text" name="q" id="id_q" value="{{ query }}"/>
+                <input type="submit" value="Search" />
+            </form>
+        {% endif %}        
+    {% endif %}
+        
+
+        
+{% endblock content %}
+        
+    
