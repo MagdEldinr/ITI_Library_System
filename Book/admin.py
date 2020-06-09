@@ -6,9 +6,9 @@ def make_published(modeladmin, request, queryset):
 make_published.short_description = "Mark selected stories as published"
 
 class BookAdmin(admin.ModelAdmin):
-    list_display = ['title', 'status']
+    list_display = ['title', 'status', 'author', 'topic']
     ordering = ['title']
-    actions = [make_published]
+    actions = ['make_published']
 
 # Register your models here.
 admin.site.register(Topic)

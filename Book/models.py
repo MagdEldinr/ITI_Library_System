@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse_lazy, reverse
 
+
 from Author.models import Author
 from . import fields
 
@@ -28,14 +29,6 @@ class Book(models.Model):
     status = models.CharField(choices=STATUS_FIELDS, max_length=1, default=P)
     author = models.ForeignKey(Author, on_delete=models.CASCADE, related_name='author_books')
     topic = models.ForeignKey(Topic, on_delete=models.CASCADE, related_name='topic_books')
-
-    # class Meta:
-    #     unique_together = ['title', 'author']
-    #     permissions = (
-    #         ("add_book", "Add Book"),
-    #         ("delete_book", "Delete Book"),
-    #         ("edit_book", "Edit Book"),
-    #     )
 
     def __str__(self):
         return self.title

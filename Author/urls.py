@@ -26,4 +26,6 @@ urlpatterns = [
     path('author_add', views.AuthorCreateView.as_view(), name='author_add'),
     path('author_edit/<int:pk>', views.AuthorUpdateView.as_view(), name='author_edit'),
     path('author_delete/<int:pk>', views.AuthorDeleteView.as_view(), name='author_delete'),
+    path('api/authors/', views.AuthorAPIList.as_view()),
+    path('api/author_detail/<int:pk>/', views.AuthorAPIDetail.as_view()),
 ]

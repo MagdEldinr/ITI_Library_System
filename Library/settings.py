@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'Author',
     'Book',
     'django_countries',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [

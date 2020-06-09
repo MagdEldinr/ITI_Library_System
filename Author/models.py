@@ -8,13 +8,6 @@ class Author(models.Model):
     email = models.CharField(max_length=128)
     nationallity = CountryField()
 
-    # class Meta:
-    #     permissions = (
-    #         ("add_author", "Add Author"),
-    #         ("delete_author", "Delete Author"),
-    #         ("edit_author", "Edit Author"),
-    #     )
-
     def __str__(self):
         return self.name
 
